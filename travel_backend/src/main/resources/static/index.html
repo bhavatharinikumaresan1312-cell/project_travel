@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelExplore - Discover Amazing Destinations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="css/custom.css?v=3" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body style="background-color: #e6e6fa;">
+<nav class="bg-gradient-to-r from-blue-200 to-purple-200 shadow-lg fixed w-full z-50">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center">
+                <i class="fas fa-plane text-primary text-2xl mr-2"></i>
+                <span class="text-xl font-bold text-gray-800">TravelExplore</span>
+            </div>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#destinations" class="text-gray-600 hover:text-primary transition">Destinations</a>
+                <a href="#reviews" class="text-gray-600 hover:text-primary transition">Reviews</a>
+                <div id="authSection">
+                    <button id="loginBtn" class="bg-gradient-to-r from-pink-300 to-purple-300 text-gray-800 px-4 py-2 rounded-lg hover:from-pink-400 hover:to-purple-400 transition font-semibold">Login</button>
+                    <div id="userSection" class="hidden flex items-center space-x-4">
+                        <span id="welcomeMsg" class="text-gray-700 font-medium"></span>
+                        <button id="logoutBtn" class="bg-gradient-to-r from-red-300 to-pink-300 text-gray-800 px-4 py-2 rounded-lg hover:from-red-400 hover:to-pink-400 transition font-semibold">Logout</button>
+                    </div>
+                </div>
+            </div>
+            <button class="md:hidden">
+                <i class="fas fa-bars text-gray-600"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="pt-16 bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-300 text-gray-800">
+    <div class="max-w-7xl mx-auto px-4 py-20">
+        <div class="text-center">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Discover Your Next Adventure</h1>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Explore amazing destinations, read authentic reviews, and plan your perfect getaway</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center max-w-2xl mx-auto">
+                <input type="text" id="searchInput" placeholder="Search destinations..." class="px-4 py-3 rounded-lg text-gray-800 flex-1">
+                <select id="categoryFilter" class="px-4 py-3 rounded-lg text-gray-800">
+                    <option value="">All Categories</option>
+                    <option value="City">City</option>
+                    <option value="Beach">Beach</option>
+                    <option value="Island">Island</option>
+                    <option value="Nature">Nature</option>
+                    <option value="Luxury">Luxury</option>
+                </select>
+                <button id="searchBtn" class="bg-gradient-to-r from-green-300 to-teal-300 text-gray-800 px-6 py-3 rounded-lg hover:from-green-400 hover:to-teal-400 transition font-semibold">
+                    <i class="fas fa-search mr-2"></i>Search
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="destinations" class="py-16" style="background-color: #e6e6fa;">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Top Destinations</h2>
+            <p class="text-gray-600">Discover the most popular travel destinations</p>
+        </div>
+        <div id="destinationsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Destinations will be loaded here -->
+        </div>
+    </div>
+</section>
+
+<section id="reviews" class="py-16 bg-gradient-to-br from-yellow-100 to-pink-100">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-800 mb-4">Latest Reviews</h2>
+            <p class="text-gray-600">What travelers are saying</p>
+        </div>
+        <div id="reviewsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        </div>
+    </div>
+</section>
+
+<div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold">Login</h3>
+            <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form id="loginForm">
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Username</label>
+                <input type="text" id="username" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary" required>
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Password</label>
+                <input type="password" id="password" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary" required>
+            </div>
+            <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-600 transition">Login</button>
+        </form>
+        <p class="text-center mt-4 text-gray-600">
+            Don't have an account? <a href="#" id="showRegister" class="text-primary hover:underline">Register</a>
+        </p>
+    </div>
+</div>
+
+<div id="registerModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold">Register</h3>
+            <button id="closeRegisterModal" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form id="registerForm">
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Username</label>
+                <input type="text" id="regUsername" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary" required>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Email</label>
+                <input type="email" id="regEmail" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary" required>
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Password</label>
+                <input type="password" id="regPassword" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary" required>
+            </div>
+            <button type="submit" class="w-full bg-secondary text-white py-2 rounded-lg hover:bg-green-600 transition">Register</button>
+        </form>
+    </div>
+</div>
+
+<div id="reviewModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold">Add Review</h3>
+            <button id="closeReviewModal" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <form id="reviewForm">
+            <div class="mb-4">
+                <label class="block text-gray-700 mb-2">Rating</label>
+                <div class="flex space-x-1" id="starRating">
+                    <i class="fas fa-star text-gray-300 cursor-pointer text-2xl" data-rating="1"></i>
+                    <i class="fas fa-star text-gray-300 cursor-pointer text-2xl" data-rating="2"></i>
+                    <i class="fas fa-star text-gray-300 cursor-pointer text-2xl" data-rating="3"></i>
+                    <i class="fas fa-star text-gray-300 cursor-pointer text-2xl" data-rating="4"></i>
+                    <i class="fas fa-star text-gray-300 cursor-pointer text-2xl" data-rating="5"></i>
+                </div>
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 mb-2">Comment</label>
+                <textarea id="reviewComment" rows="4" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-primary" required></textarea>
+            </div>
+            <button type="submit" class="w-full bg-primary text-white py-2 rounded-lg hover:bg-blue-600 transition">Submit Review</button>
+        </form>
+    </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
